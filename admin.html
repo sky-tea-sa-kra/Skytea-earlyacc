@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ADMIN PANEL</title>
+        <link rel="stylesheet" href="style.css"> 
+        <style>
+            /* Gaya khusus untuk item di Admin Panel */
+            .tea-management-item {
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 20px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                background-color: #1a1a1a;
+            }
+            .tea-management-item h3 {
+                margin-bottom: 5px;
+                font-weight: 600;
+                color: #5d5dff;
+            }
+            .tea-management-item .subtitle {
+                font-size: 0.9rem;
+                color: rgba(255, 255, 255, 0.7);
+            }
+            .tea-management-item .tea-content {
+                white-space: pre-wrap; /* Menjaga format paragraf */
+                margin-top: 15px;
+                padding: 10px;
+                background-color: #0d0d0d;
+                border-radius: 5px;
+                border-left: 3px solid #5d5dff;
+            }
+            .admin-actions {
+                display: flex;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            .admin-button {
+                /* Menggunakan kelas .submit-button untuk gaya yang konsisten */
+                display: inline-block;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 8px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.1s;
+                text-decoration: none;
+                text-align: center;
+            }
+            .approve-btn {
+                background-color: #4CAF50; /* Hijau */
+                color: white;
+            }
+            .reject-btn {
+                background-color: #f44336; /* Merah */
+                color: white;
+            }
+            .delete-btn {
+                background-color: #cc0000; /* Merah Tua */
+                color: white;
+            }
+            .admin-button:hover {
+                transform: translateY(-2px);
+            }
+            .admin-login-area {
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body style="background-color: rgb(0, 0, 0);">
+
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <span class="logo">Skytea</span>
+                <button id="toggle-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z"/></svg>
+                </button>
+            </div>
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                        <span>New Tea!</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tealist.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M160-120v-80h640v80H160Zm160-160q-66 0-113-47t-47-113v-400h640q33 0 56.5 23.5T880-760v120q0 33-23.5 56.5T800-560h-80v120q0 66-47 113t-113 47H320Zm0-480h320-400 80Zm400 120h80v-120h-80v120ZM560-360q33 0 56.5-23.5T640-440v-320H400v16l72 58q2 2 8 16v170q0 8-6 14t-14 6H300q-8 0-14-6t-6-14v-170q0-2 8-16l72-58v-16H240v320q0 33 23.5 56.5T320-360h240ZM360-760h40-40Z"/></svg>
+                        <span>Tea List</span>
+                    </a>
+                </li>
+                 <li class="active">
+                    <a href="admin.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M160-160v-480h640v480H160Zm0 80h640q33 0 56.5-23.5T880-160v-480q0-33-23.5-56.5T800-720H160q-33 0-56.5 23.5T80-640v480q0 33 23.5 56.5T160-80Zm80-160h480v-80H240v80Zm-80 0v-480 480Z"/></svg>
+                        <span>Admin</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main id="main">
+            <header class="main-header">
+                <img src="IMG-20251105-WA0018_1_-removebg-preview-removebg-preview-removebg-preview.png" alt="Skytealogo" width="300px" height="75px">
+            </header>
+            
+            <div id="admin-login-area" class="submission-form-container admin-login-area">
+                <h2>Admin Panel</h2>
+                <p class="subtitle" style="margin-bottom: 20px;">Hanya untuk Admin. Akses membutuhkan kata sandi.</p>
+                <button id="login-button" class="submit-button" style="width: 200px;">Masuk sebagai Admin</button>
+            </div>
+            
+            <div id="admin-panel" style="display: none;">
+                
+                <div class="submission-form-container">
+                    <h2>Tea Menunggu Persetujuan</h2>
+                    <p class="subtitle">Berikut adalah Tea yang menunggu persetujuan Anda.</p>
+                    <div id="admin-panel-container">
+                        <p class="subtitle">Memuat kiriman tertunda...</p>
+                    </div>
+                </div>
+
+                <div class="submission-form-container">
+                    <h2>Manajemen Tea yang Sudah Dipublikasikan</h2>
+                    <p class="subtitle">Anda dapat menghapus Tea yang sudah disetujui secara permanen dari sini.</p>
+                    <div id="admin-approved-container">
+                        <p class="subtitle">Memuat Tea yang disetujui...</p>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+
+        <script>
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('toggle-btn');
+            
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+                // FIX: Menambahkan/menghapus kelas 'sidebar-collapsed' pada <body>
+                document.body.classList.toggle('sidebar-collapsed');
+            });
+        </script>
+        <script src="admin.js"></script> 
+    </body>
+    
+</html>
